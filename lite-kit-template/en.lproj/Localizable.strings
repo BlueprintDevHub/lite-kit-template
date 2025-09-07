@@ -1,0 +1,121 @@
+/* 
+  Localizable.strings
+  lite-kit-template
+
+  Created by Alterem on 9/7/25.
+  
+*/
+
+// MARK: - Tab Bar
+"home" = "首页";
+"components" = "组件";
+"profile" = "设置";
+
+// MARK: - Home Page
+"hitokoto_title" = "一言";
+"hitokoto_loading" = "获取中...";
+"hitokoto_refresh" = "获取一言";
+"hitokoto_copied" = "已复制";
+"hitokoto_copy_message" = "内容已复制到剪贴板";
+"hitokoto_error_retry" = "重试";
+"hitokoto_error_default" = "获取失败";
+"hitokoto_click_to_get" = "点击下方按钮获取一言";
+"hitokoto_category_all" = "全部";
+
+// MARK: - Components Page
+"components_title" = "Swift组件";
+"basic_components" = "基础组件";
+"text_components" = "文本组件";
+"button_components" = "按钮组件";
+"input_components" = "输入组件";
+"image_components" = "图片组件";
+"layout_components" = "布局组件";
+"stack_layout" = "堆栈布局";
+"grid_layout" = "网格布局";
+"scroll_view" = "滚动视图";
+"interactive_components" = "交互组件";
+"picker_components" = "选择器";
+"slider_stepper" = "滑块与步进器";
+"toggle_components" = "开关与切换";
+"progress_components" = "进度指示器";
+"navigation_components" = "导航组件";
+"tab_components" = "标签页";
+"alert_components" = "弹窗与提示";
+"toolbar_components" = "工具栏";
+"advanced_components" = "高级组件";
+"chart_components" = "图表组件";
+"map_components" = "地图组件";
+"animation_components" = "动画效果";
+
+// MARK: - Profile Page
+"profile_title" = "个人中心";
+"personal_info" = "个人信息";
+"edit_profile" = "编辑资料";
+"edit_profile_subtitle" = "修改个人信息";
+"my_favorites" = "我的收藏";
+"favorites_subtitle" = "查看收藏的内容";
+"browse_history" = "浏览历史";
+"history_subtitle" = "查看最近浏览";
+"settings" = "设置";
+"general_settings" = "通用设置";
+"general_subtitle" = "主题、语言等设置";
+"notification_settings" = "通知设置";
+"notification_subtitle" = "管理推送通知";
+"privacy_settings" = "隐私设置";
+"privacy_subtitle" = "账户安全与隐私";
+"data_sync" = "数据同步";
+"sync_subtitle" = "云端数据备份";
+"about" = "关于";
+"help_feedback" = "帮助与反馈";
+"help_subtitle" = "获取帮助或提交反馈";
+"terms_service" = "使用条款";
+"terms_subtitle" = "查看服务条款";
+"about_app" = "关于应用";
+"about_subtitle" = "版本 1.0.0";
+
+// MARK: - Settings Page
+"settings_title" = "设置";
+"appearance" = "外观";
+"dark_mode" = "深色模式";
+"font_size" = "字体大小";
+"language_region" = "语言与地区";
+"language" = "语言";
+"region" = "地区";
+"notifications" = "通知";
+"push_notifications" = "推送通知";
+"notification_sound" = "通知声音";
+"data_storage" = "数据与存储";
+"auto_sync" = "自动同步";
+"clear_cache" = "清除缓存";
+"advanced_settings" = "高级设置";
+"developer_options" = "开发者选项";
+"reset_all_settings" = "重置所有设置";
+"cancel" = "取消";
+"done" = "完成";
+
+// MARK: - Avatar Selection
+"select_avatar" = "选择头像";
+"take_photo" = "拍照";
+"choose_from_library" = "从相册选择";
+
+// MARK: - Font Sizes
+"font_small" = "小";
+"font_standard" = "标准";
+"font_large" = "大";
+"font_extra_large" = "超大";
+
+// MARK: - Languages
+"chinese" = "中文";
+"english" = "English";
+"japanese" = "日本語";
+"korean" = "한국어";
+
+// MARK: - Other
+"loading" = "加载中...";
+"error" = "错误";
+"retry" = "重试";
+"confirm" = "确认";
+"ok" = "确定";
+"default" = "默认";
+"china" = "中国";
+"user_signature" = "iOS开发者，热爱编程与设计";

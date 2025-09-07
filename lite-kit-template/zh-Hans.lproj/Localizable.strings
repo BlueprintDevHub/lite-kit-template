@@ -1,0 +1,121 @@
+/* 
+  Localizable.strings
+  lite-kit-template
+
+  Created by Alterem on 9/7/25.
+  
+*/
+
+// MARK: - Tab Bar
+"home" = "Home";
+"components" = "Components";
+"profile" = "Settings";
+
+// MARK: - Home Page
+"hitokoto_title" = "Hitokoto";
+"hitokoto_loading" = "Loading...";
+"hitokoto_refresh" = "Get Hitokoto";
+"hitokoto_copied" = "Copied";
+"hitokoto_copy_message" = "Content copied to clipboard";
+"hitokoto_error_retry" = "Retry";
+"hitokoto_error_default" = "Failed to fetch";
+"hitokoto_click_to_get" = "Click the button below to get a hitokoto";
+"hitokoto_category_all" = "All";
+
+// MARK: - Components Page
+"components_title" = "Swift Components";
+"basic_components" = "Basic Components";
+"text_components" = "Text Components";
+"button_components" = "Button Components";
+"input_components" = "Input Components";
+"image_components" = "Image Components";
+"layout_components" = "Layout Components";
+"stack_layout" = "Stack Layout";
+"grid_layout" = "Grid Layout";
+"scroll_view" = "Scroll View";
+"interactive_components" = "Interactive Components";
+"picker_components" = "Picker Components";
+"slider_stepper" = "Slider & Stepper";
+"toggle_components" = "Toggle Components";
+"progress_components" = "Progress Components";
+"navigation_components" = "Navigation Components";
+"tab_components" = "Tab Components";
+"alert_components" = "Alert Components";
+"toolbar_components" = "Toolbar Components";
+"advanced_components" = "Advanced Components";
+"chart_components" = "Chart Components";
+"map_components" = "Map Components";
+"animation_components" = "Animation Components";
+
+// MARK: - Profile Page
+"profile_title" = "Profile";
+"personal_info" = "Personal Info";
+"edit_profile" = "Edit Profile";
+"edit_profile_subtitle" = "Edit personal information";
+"my_favorites" = "My Favorites";
+"favorites_subtitle" = "View favorite content";
+"browse_history" = "Browse History";
+"history_subtitle" = "View recent browsing";
+"settings" = "Settings";
+"general_settings" = "General Settings";
+"general_subtitle" = "Theme, language and other settings";
+"notification_settings" = "Notification Settings";
+"notification_subtitle" = "Manage push notifications";
+"privacy_settings" = "Privacy Settings";
+"privacy_subtitle" = "Account security and privacy";
+"data_sync" = "Data Sync";
+"sync_subtitle" = "Cloud data backup";
+"about" = "About";
+"help_feedback" = "Help & Feedback";
+"help_subtitle" = "Get help or submit feedback";
+"terms_service" = "Terms of Service";
+"terms_subtitle" = "View terms of service";
+"about_app" = "About App";
+"about_subtitle" = "Version 1.0.0";
+
+// MARK: - Settings Page
+"settings_title" = "Settings";
+"appearance" = "Appearance";
+"dark_mode" = "Dark Mode";
+"font_size" = "Font Size";
+"language_region" = "Language & Region";
+"language" = "Language";
+"region" = "Region";
+"notifications" = "Notifications";
+"push_notifications" = "Push Notifications";
+"notification_sound" = "Notification Sound";
+"data_storage" = "Data & Storage";
+"auto_sync" = "Auto Sync";
+"clear_cache" = "Clear Cache";
+"advanced_settings" = "Advanced Settings";
+"developer_options" = "Developer Options";
+"reset_all_settings" = "Reset All Settings";
+"cancel" = "Cancel";
+"done" = "Done";
+
+// MARK: - Avatar Selection
+"select_avatar" = "Select Avatar";
+"take_photo" = "Take Photo";
+"choose_from_library" = "Choose from Library";
+
+// MARK: - Font Sizes
+"font_small" = "Small";
+"font_standard" = "Standard";
+"font_large" = "Large";
+"font_extra_large" = "Extra Large";
+
+// MARK: - Languages
+"chinese" = "中文";
+"english" = "English";
+"japanese" = "日本語";
+"korean" = "한국어";
+
+// MARK: - Other
+"loading" = "Loading...";
+"error" = "Error";
+"retry" = "Retry";
+"confirm" = "Confirm";
+"ok" = "OK";
+"default" = "Default";
+"china" = "China";
+"user_signature" = "iOS Developer, passionate about programming and design";

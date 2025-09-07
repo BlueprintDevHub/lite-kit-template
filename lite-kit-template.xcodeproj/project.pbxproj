@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		35EDE47B2E6D8A1C00706531 /* LiteKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiteKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35EDE47B2E6D8A1C00706531 /* lite-kit-template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lite-kit-template.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		35EDE5822E6DA22E00706531 /* Exceptions for "lite-kit-template" folder in "lite-kit-template" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 35EDE47A2E6D8A1C00706531 /* LiteKit */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		35EDE47D2E6D8A1C00706531 /* LiteKit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LiteKit;
+			exceptions = (
+				35EDE5822E6DA22E00706531 /* Exceptions for "lite-kit-template" folder in "lite-kit-template" target */,
+			);
+			path = "lite-kit-template";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +53,7 @@
 		35EDE47C2E6D8A1C00706531 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				35EDE47B2E6D8A1C00706531 /* LiteKit.app */,
+				35EDE47B2E6D8A1C00706531 /* lite-kit-template.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,7 +63,7 @@
 /* Begin PBXNativeTarget section */
 		35EDE47A2E6D8A1C00706531 /* LiteKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35EDE4862E6D8A1D00706531 /* Build configuration list for PBXNativeTarget "LiteKit" */;
+			buildConfigurationList = 35EDE4862E6D8A1D00706531 /* Build configuration list for PBXNativeTarget "lite-kit-template" */;
 			buildPhases = (
 				35EDE4772E6D8A1C00706531 /* Sources */,
 				35EDE4782E6D8A1C00706531 /* Frameworks */,
@@ -63,11 +76,11 @@
 			fileSystemSynchronizedGroups = (
 				35EDE47D2E6D8A1C00706531 /* LiteKit */,
 			);
-			name = LiteKit;
+			name = "lite-kit-template";
 			packageProductDependencies = (
 			);
-			productName = LiteKit;
-			productReference = 35EDE47B2E6D8A1C00706531 /* LiteKit.app */;
+			productName = "lite-kit-template";
+			productReference = 35EDE47B2E6D8A1C00706531 /* lite-kit-template.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,12 +98,13 @@
 					};
 				};
 			};
-			buildConfigurationList = 35EDE4762E6D8A1C00706531 /* Build configuration list for PBXProject "LiteKit" */;
-			developmentRegion = en;
+			buildConfigurationList = 35EDE4762E6D8A1C00706531 /* Build configuration list for PBXProject "lite-kit-template" */;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 35EDE4722E6D8A1C00706531;
 			minimizedProjectReferenceProxies = 1;
@@ -256,6 +270,8 @@
 				DEVELOPMENT_TEAM = K68RDJ84GS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "lite-kit-template/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -266,7 +282,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alterem.LiteKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alterem.lite-kit-template;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -284,6 +300,8 @@
 				DEVELOPMENT_TEAM = K68RDJ84GS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "lite-kit-template/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -294,7 +312,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alterem.LiteKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alterem.lite-kit-template;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -305,7 +323,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35EDE4762E6D8A1C00706531 /* Build configuration list for PBXProject "LiteKit" */ = {
+		35EDE4762E6D8A1C00706531 /* Build configuration list for PBXProject "lite-kit-template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				35EDE4842E6D8A1D00706531 /* Debug */,
@@ -314,7 +332,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		35EDE4862E6D8A1D00706531 /* Build configuration list for PBXNativeTarget "LiteKit" */ = {
+		35EDE4862E6D8A1D00706531 /* Build configuration list for PBXNativeTarget "lite-kit-template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				35EDE4872E6D8A1D00706531 /* Debug */,
