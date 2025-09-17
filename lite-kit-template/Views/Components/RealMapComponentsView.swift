@@ -15,6 +15,7 @@ struct RealMapComponentsView: View {
     @State private var annotations: [MapAnnotation] = []
     @State private var route: MKRoute?
     @State private var showingRoute = false
+    @State private var directions: MKDirections? // 支持取消
     
     let locations = [
         MapLocation.beijing,
@@ -92,6 +93,8 @@ struct RealMapComponentsView: View {
                             if showingRoute {
                                 route = nil
                                 showingRoute = false
+                                directions?.cancel()
+                                directions = nil
                             } else {
                                 calculateRoute()
                             }
@@ -191,6 +194,7 @@ struct RealMapComponentsView: View {
     }
     
     private func calculateRoute() {
+        directions?.cancel()
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(
             coordinate: CLLocationCoordinate2D(latitude: 39.9042, longitude: 116.4074)
@@ -200,13 +204,12 @@ struct RealMapComponentsView: View {
         ))
         request.transportType = .automobile
         
-        let directions = MKDirections(request: request)
-        directions.calculate { response, error in
+        let newDirections = MKDirections(request: request)
+        directions = newDirections
+        newDirections.calculate { response, _ in
             if let route = response?.routes.first {
                 self.route = route
                 self.showingRoute = true
-                
-                // 调整地图区域以显示整个路线
                 withAnimation {
                     self.region = MKCoordinateRegion(route.polyline.boundingMapRect)
                 }
@@ -220,7 +223,7 @@ struct RealMapComponentsView: View {
         request.region = region
         
         let search = MKLocalSearch(request: request)
-        search.start { response, error in
+        search.start { response, _ in
             if let response = response {
                 let newAnnotations = response.mapItems.prefix(10).map { item in
                     MapAnnotation(
@@ -273,15 +276,17 @@ struct RealMapView: UIViewRepresentable {
             uiView.setRegion(region, animated: true)
         }
         
-        // 更新标注
-        let currentAnnotations = uiView.annotations.compactMap { $0 as? MapAnnotation }
-        if currentAnnotations != annotations {
-            uiView.removeAnnotations(currentAnnotations)
-            uiView.addAnnotations(annotations)
-        }
+        // 更新标注（差异更新，避免全量刷新）
+        let existing = uiView.annotations.compactMap { $0 as? MapAnnotation }
+        let toRemove = existing.filter { !annotations.contains($0) }
+        let toAdd = annotations.filter { !existing.contains($0) }
+        if !toRemove.isEmpty { uiView.removeAnnotations(toRemove) }
+        if !toAdd.isEmpty { uiView.addAnnotations(toAdd) }
         
         // 更新路线
-        uiView.removeOverlays(uiView.overlays)
+        if !uiView.overlays.isEmpty {
+            uiView.removeOverlays(uiView.overlays)
+        }
         if let route = route {
             uiView.addOverlay(route.polyline)
         }
@@ -331,7 +336,7 @@ struct RealMapView: UIViewRepresentable {
 }
 
 // 地图标注类
-class MapAnnotation: NSObject, MKAnnotation {
+final class MapAnnotation: NSObject, MKAnnotation {
     let coordinate: CLLocationCoordinate2D
     let title: String?
     let subtitle: String?
@@ -341,14 +346,23 @@ class MapAnnotation: NSObject, MKAnnotation {
         self.title = title
         self.subtitle = subtitle
     }
-}
-
-// MapAnnotation 相等性比较
-extension MapAnnotation {
-    static func == (lhs: MapAnnotation, rhs: MapAnnotation) -> Bool {
-        return lhs.coordinate.latitude == rhs.coordinate.latitude &&
-               lhs.coordinate.longitude == rhs.coordinate.longitude &&
-               lhs.title == rhs.title
+    
+    // 通过重写 NSObject 等价与哈希，提供“值相等”语义，避免数组 diff 仅按对象身份比较
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let rhs = object as? MapAnnotation else { return false }
+        return coordinate.latitude == rhs.coordinate.latitude &&
+               coordinate.longitude == rhs.coordinate.longitude &&
+               title == rhs.title &&
+               subtitle == rhs.subtitle
+    }
+    
+    override var hash: Int {
+        var hasher = Hasher()
+        hasher.combine(coordinate.latitude)
+        hasher.combine(coordinate.longitude)
+        hasher.combine(title)
+        hasher.combine(subtitle)
+        return hasher.finalize()
     }
 }
 

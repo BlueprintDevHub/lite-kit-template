@@ -60,10 +60,9 @@ struct AvatarUploadView: View {
                 await loadSelectedImage(from: newItem)
             }
         }
-        .fullScreenCover(isPresented: $showingCamera) {
-            ImagePickerView(sourceType: .camera) { image in
-                handleImageSelection(image)
-            }
+        // 统一使用已有的 ImagePicker（相机）
+        .sheet(isPresented: $showingCamera) {
+            ImagePicker(image: $profileImage, sourceType: .camera)
         }
         .alert("删除头像", isPresented: $showingDeleteConfirmation) {
             Button("删除", role: .destructive) {
@@ -93,11 +92,11 @@ struct AvatarUploadView: View {
                         isLoading = false
                     }
                 }
+            } else {
+                await MainActor.run { isLoading = false }
             }
         } catch {
-            await MainActor.run {
-                isLoading = false
-            }
+            await MainActor.run { isLoading = false }
         }
     }
     
@@ -114,6 +113,7 @@ struct AvatarUploadView: View {
                             .stroke(Color.white, lineWidth: 4)
                             .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
                     )
+                    .accessibilityLabel("头像")
             } else {
                 defaultAvatar
             }
@@ -145,6 +145,7 @@ struct AvatarUploadView: View {
                     .stroke(Color.white, lineWidth: 4)
                     .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
             )
+            .accessibilityLabel("默认头像")
     }
     
     private var editButton: some View {
@@ -168,6 +169,7 @@ struct AvatarUploadView: View {
         .offset(x: size * 0.3, y: size * 0.3)
         .scaleEffect(showingImagePicker ? 1.1 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.6), value: showingImagePicker)
+        .accessibilityLabel("编辑头像")
     }
     
     private var loadingOverlay: some View {
@@ -179,58 +181,7 @@ struct AvatarUploadView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     .scaleEffect(1.2)
             )
-    }
-    
-    private func handleImageSelection(_ image: UIImage?) {
-        guard let image = image else { return }
-        
-        isLoading = true
-        
-        // 模拟图片处理/上传延迟
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            withAnimation(.easeInOut) {
-                self.profileImage = image
-                self.isLoading = false
-            }
-        }
-    }
-}
-
-// MARK: - Image Picker for Camera
-struct ImagePickerView: UIViewControllerRepresentable {
-    let sourceType: UIImagePickerController.SourceType
-    let onImagePicked: (UIImage?) -> Void
-    @Environment(\.dismiss) private var dismiss
-    
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.sourceType = sourceType
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let parent: ImagePickerView
-        
-        init(_ parent: ImagePickerView) {
-            self.parent = parent
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let image = info[.originalImage] as? UIImage
-            parent.onImagePicked(image)
-            parent.dismiss()
-        }
-        
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.dismiss()
-        }
+            .accessibilityLabel("图片加载中")
     }
 }
 

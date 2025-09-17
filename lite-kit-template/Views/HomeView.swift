@@ -1,9 +1,9 @@
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
     @StateObject private var hitokotoService = HitokotoService()
     @State private var selectedType: HitokotoType? = nil
-    @State private var showTypeSelector = false
     @State private var showCopiedAlert = false
     
     var body: some View {
@@ -43,7 +43,7 @@ struct HomeView: View {
                                     .foregroundColor(.secondary)
                                     .multilineTextAlignment(.center)
                                 Button("重试") {
-                                    hitokotoService.fetchHitokoto(type: selectedType)
+                                    Task { await hitokotoService.fetchHitokotoAsync(type: selectedType, forceRefresh: true) }
                                 }
                                 .buttonStyle(.bordered)
                             }
@@ -62,34 +62,47 @@ struct HomeView: View {
                     .padding()
                 }
                 .refreshable {
-                    hitokotoService.fetchHitokoto(type: selectedType)
+                    // 下拉刷新：强制刷新，跳过缓存
+                    await hitokotoService.fetchHitokotoAsync(type: selectedType, forceRefresh: true)
                 }
                 
-                Button(action: {
-                    hitokotoService.fetchHitokoto(type: selectedType)
-                }) {
-                    HStack {
-                        Image(systemName: "arrow.clockwise")
-                        Text("获取一言")
+                VStack(spacing: 8) {
+                    Button(action: {
+                        // 点击按钮：强制刷新，确保获取新内容
+                        Task { await hitokotoService.fetchHitokotoAsync(type: selectedType, forceRefresh: true) }
+                    }) {
+                        HStack {
+                            Image(systemName: "arrow.clockwise")
+                            Text("获取一言")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .disabled(hitokotoService.isLoading)
+                    
+                    if let updated = hitokotoService.lastUpdatedAt {
+                        Text("上次更新：\(updated.formatted(date: .abbreviated, time: .standard))")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                            .padding(.top, 2)
+                    }
                 }
-                .disabled(hitokotoService.isLoading)
                 .padding(.horizontal)
                 .padding(.bottom, 20)
             }
             .navigationTitle("一言")
             .onAppear {
+                // 首次进入：缓存优先加载一次（避免 loading 闪烁）
                 if hitokotoService.currentHitokoto == nil {
-                    hitokotoService.fetchHitokoto()
+                    Task { await hitokotoService.fetchHitokotoAsync(type: selectedType) }
                 }
             }
-            .onChange(of: selectedType) { _ in
-                hitokotoService.fetchHitokoto(type: selectedType)
+            .onChange(of: selectedType) { _, _ in
+                // 切换分类：缓存优先加载
+                Task { await hitokotoService.fetchHitokotoAsync(type: selectedType) }
             }
             .alert("已复制", isPresented: $showCopiedAlert) {
                 Button("确定", role: .cancel) {}
@@ -114,7 +127,6 @@ struct HitokotoCard: View {
             Text(hitokoto.hitokoto)
                 .font(.title2)
                 .fontWeight(.medium)
-                .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
             
             HStack {
@@ -144,6 +156,7 @@ struct HitokotoCard: View {
                     Button(action: onCopy) {
                         Image(systemName: "doc.on.doc")
                             .foregroundColor(.blue)
+                            .accessibilityLabel("复制")
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
